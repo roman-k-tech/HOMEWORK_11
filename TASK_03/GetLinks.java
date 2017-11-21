@@ -14,8 +14,7 @@ public class GetLinks {
     private static String urlAddress = "https://stackoverflow.com/questions/5120171/extract-links-from-a-web-page";
     private static String outputFile = "output.txt";
 
-    public GetLinks(HttpURLConnection httpURLConnection)
-    {
+    public GetLinks(HttpURLConnection httpURLConnection) {
         this.httpURLConnection = httpURLConnection;
     }
 
@@ -33,24 +32,25 @@ public class GetLinks {
             PrintWriter printWriter = new PrintWriter(output);
             LinksList.stream().forEach(a -> printWriter.println(a));
             printWriter.close();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (MalformedURLException e) {e.printStackTrace();}
-        catch (IOException e) {e.printStackTrace();}
     }
 
-    public List<String> parse ()
-    {
+    public List<String> parse() {
         List<String> LinksList = null;
         try (
-            InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader)
-        )
-        {
+                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader)
+        ) {
             LinksList = new ArrayList<String>();
 
             LinksList = bufferedReader.lines().filter(n -> n.contains("href=")).map(n -> n.trim()).collect(Collectors.toCollection(ArrayList::new));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (IOException e) { e.printStackTrace();}
 
         return LinksList;
     }

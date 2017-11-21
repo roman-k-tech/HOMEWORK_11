@@ -13,8 +13,7 @@ public class Input implements Runnable {
     private Boolean ifPressed = false;
     private ServerSocket serverSocket;
 
-    public Input(ServerSocket serverSocket)
-    {
+    public Input(ServerSocket serverSocket) {
         Thread thread = new Thread(this);
         thread.start();
         this.serverSocket = serverSocket;
@@ -26,22 +25,21 @@ public class Input implements Runnable {
         System.out.print("To stop server press ENTER:");
         char input = ' ';
 
-        while (input != '\n')
-        {
-            try
-            {
+        while (input != '\n') {
+            try {
                 input = (char) System.in.read();
                 System.in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            catch (IOException e) {e.printStackTrace();}
         }
 
 
         System.out.print("Server Stopped!");
-        try
-        {
+        try {
             serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (IOException e) {e.printStackTrace();}
     }
 }

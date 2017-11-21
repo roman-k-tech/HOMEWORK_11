@@ -15,17 +15,15 @@ public class Main {
 
         Input input = new Input(serverSocket);
 
-        try
-        {
-            while (true)
-            {
+        try {
+            while (true) {
                 socket = serverSocket.accept();
                 client = new Client(socket, counter);
                 new Thread(client).start();
                 counter++;
             }
+        } catch (SocketException e) {
         }
-        catch (SocketException e) {}
         serverSocket.close();
     }
 }

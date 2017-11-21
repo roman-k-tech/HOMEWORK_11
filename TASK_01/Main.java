@@ -9,8 +9,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main
-{
+public class Main {
     public static void main(String[] args) {
 
         AddressCheck ac = new AddressCheck();
@@ -29,8 +28,9 @@ class AddressCheck {
         try {
             Files.lines(Paths.get(file.getAbsolutePath())).forEach(a -> addressMap.put(a, ""));
 
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (IOException e) {e.printStackTrace();}
     }
 
     public void checkAllAddress() {
@@ -48,12 +48,10 @@ class AddressCheck {
             int responseCode = con.getResponseCode();
             if (responseCode == 200) {
                 return " OK";
-            }
-            else {
+            } else {
                 return "" + responseCode + " " + con.getResponseMessage();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             return " NOT AVIABLE";
         }
     }
