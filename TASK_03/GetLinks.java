@@ -1,6 +1,5 @@
 package TASK_03;
 
-import javax.sound.midi.Sequence;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -8,12 +7,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class GetLinks {
 
     private HttpURLConnection httpURLConnection;
-    private static String urlAddress = "https://prog.kiev.ua/forum/index.php/board,2.0.html";
+    private static String urlAddress = "https://stackoverflow.com/questions/5120171/extract-links-from-a-web-page";
     private static String outputFile = "output.txt";
 
     public GetLinks(HttpURLConnection httpURLConnection)
